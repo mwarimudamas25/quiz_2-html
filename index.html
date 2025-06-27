@@ -103,14 +103,17 @@
 <div id="password-modal">
   <div class="modal-content">
     <span onclick="closeModal()" class="close-btn">&times;</span>
-    <h3>SHYIRAMO KODE IKWEMERERA GUKORA IKI KIZAMI</h3>
-    <input type="password" id="password-input" placeholder="ANDIKA IYO KODE HANO">
-    <br><br>
-    <button id="confirmBtn" onclick="checkPassword()">EMEZA NYUMA YO KWANDIKAMO KODE</button>
-    <br><br>
-    <button id="exitSectionBtn" onclick="exitToSection()">KANDA HANO USABE KODE</button>
-    <br><br>
-    <button id="exitGoBackBtn" onclick="closeModal()">SOHOKA NIBA UDASHAKA GUKOMEZA</button>
+ <h3>SHYIRAMO KODE IKWEMERERA GUKORA IKI KIZAMI</h3>
+<input type="password" id="password-input" placeholder="ANDIKA IYO KODE HANO">
+<br><br>
+<button id="confirmBtn" onclick="checkPassword()">EMEZA NYUMA YO KWANDIKAMO KODE</button>
+<br><br>
+<button id="sectionBtn1" onclick="exitToSection1()">ANDA HANO USABE KODE</button>
+<br><br>
+<button id="sectionBtn2" onclick="exitToSection2()">KANDA HANO WIHUGURE</button>
+<br><br>
+
+<button id="exitGoBackBtn" onclick="closeModal()">SOHOKA NIBA UDASHAKA GUKOMEZA</button>   
    
   </div>
 </div>
@@ -158,15 +161,21 @@
   #confirmBtn:hover {
     background-color: #0056b3;
   }
-    #exitSectionBtn {
+    #section1Btn {
     background-color: green;
   }
-  #exitSectionBtn:hover {
+  #section1Btn:hover {
     background-color: #006400;
   }
+  #section2Btn {
+    background-color: gray;
+ }
+ #section2Btn:hover {
+    background-color: #555;
+ }
   #exitGoBackBtn {
     background-color: darkred;
-  }
+ }
   #exitGoBackBtn:hover {
     background-color: #b30000;
   }
@@ -501,10 +510,14 @@ setTimeout(function() {
   if (msg) msg.style.display = "none";
 }, 120000); // 2 minutes
 
-
-function exitToSection() {
-  document.getElementById("password-modal").style.display = "none";
+function exitToSection1() {
+ document.getElementById("password-modal").style.display = "none";
   window.location.href = "https://mwarimudamas.wixsite.com/mwarimudamas#contact-us";
+}
+
+function exitToSection2() {
+  document.getElementById("password-modal").style.display = "none";
+  window.location.href = "https://mwarimudamas.wixsite.com/mwarimudamas#lessons";
 }
 
 function closeModal() {
