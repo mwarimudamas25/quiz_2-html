@@ -119,14 +119,14 @@
 </div>
 <style>
   #password-modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  overflow: auto; /* Enable scrolling if content too long */
   }
 
   .modal-content {
@@ -151,8 +151,8 @@
     border-radius: 6px;
     color: white;
     cursor: pointer;
-    margin-bottom: 10px;
-    width: 80%;
+    margin-bottom: 2px;
+    width: 100%;
   }
 
   #confirmBtn {
