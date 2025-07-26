@@ -3,38 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ikizamini No.2</title>
-  <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-<script>
-  document.addEventListener("copy", function(e) {
-    e.preventDefault();
-    alert("Copying is disabled!");
-  });
-</script>
+  <title>IKIZAMI CYA 2</title>
+  <script>
+    document.addEventListener("copy", function(e) {
+      e.preventDefault();
+      alert("Copying is disabled!");
+    });
+  </script>
 
   <style>
     body {
-        font-family: Arial, sans-serif;
+      font-family: Arial, sans-serif;
       font-size: 20px;
       line-height: 1.5;
       padding: 20px;
       background: #fff;
       margin: 0;
-      
-      
     }
     .custom-button {
-      width: 160px;
-      height: 50px;
+      width: 300px;
+      height: 40px;
       background-color: blue;
       color: white;
       border: none;
+      font-size: 20px;
+      font-weight: bold;
       cursor: pointer;
-      font-size: 14px;
-      margin: 20px;
     }
     .custom-button:hover {
-      background-color: red;
+      background-color: darkblue;
     }
     #quiz-container {
       display: none;
@@ -44,185 +41,316 @@
       box-sizing: border-box;
     }
     .question {
+      font-weight: bold;
       margin-bottom: 20px;
     }
-    .question p {
-      font-weight: bold;
-    }
-    .options label {
+    .option-button {
       font-weight: normal;
       display: block;
+      margin: 16px 0;
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      font-size: 20px;
     }
-    .submit-button, .review-button, .home-button {
+    .option-button:hover {
+      background-color: #eef;
+    }
+   .option-button.correct {
+      background-color: #c8f7c5 !important;
+      border-color: green;
+    }
+    .option-button.wrong {
+      background-color: #f7c5c5 !important;
+      border-color: red;
+    }
+ input[type="radio"] {
+  transform: scale(1.5); /* Increase size */
+  margin: 10px;
+  accent-color: #007bff; /* Blue when selected */
+  cursor: pointer;
+}
+
+input[type="radio"]:checked {
+  outline: 2px solid #007bff;
+  box-shadow: 0 0 5px #007bff;
+}
+   .correct::after {
+   content: " ✅ ";
+   color: green;
+   margin-left: 4px;
+   }
+   .wrong::after {
+   content: " ❌(Icyo wasubije si cyo! Reba igisubizo cy'ukuri mu ibara ry'icyatsi.) ";
+   color: red;
+  margin-left: 4px;
+  }
+    .submit-button {
+      background-color: blue;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      margin-top: 10px;
+      cursor: pointer;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    .submit-button:hover {
+      background-color: darkblue;
+    }
+    .review-button {
+      background-color: green;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      margin-top: 10px;
+      cursor: pointer;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    .review-button:hover {
+      background-color: green;
+    }
+    .home-button {
+      background-color: darkred;
+      color: white;
       padding: 10px 20px;
       border: none;
       cursor: pointer;
       margin-right: 10px;
       font-weight: bold;
+      margin-top: 10px;
     }
-    .submit-button { background-color: blue; color: white; }
-    .submit-button:hover { background-color: red; }
-    .review-button { background-color: green; color: white; }
-    .home-button:hover { background-color: darkred; }
-    .review-button:hover { background-color: red; }
-    #result-message {
+    .home-button:hover {
+      background-color: red;
+    }
+    #result {
       margin-top: 20px;
       font-weight: bold;
-   }
-    .home-button {
-      background-color: green;
+    }
+    #timer {
+      font-weight: bold;
+      color: red;
+      margin-bottom: 10px;
+    }
+    #password-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.4);
+      overflow: auto; /* Enable scrolling if content too long */
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 10px;
+      text-align: center;
+      position: relative;  
+    }
+    .modal-content input {
+      width: 90%;
+      padding: 10px;
+      font-size: 12px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
       color: white;
-      margin-top: 10px;
-   }
-   
+      cursor: pointer;
+      margin-bottom: 2px;
+      width: 100%;
+    }
+    #confirmBtn {
+      background-color: #007bff;
+    }
+    #confirmBtn:hover {
+      background-color: #0056b3;
+    }
+    #sectionBtn1 {
+      background-color: green;
+    }
+    #sectionBtn1:hover {
+      background-color: #006400;
+    }
+    #sectionBtn2 { 
+      background-color: gray;
+    }
+    #sectionBtn2:hover {
+      background-color: #555;
+    }
+    #exitGoBackBtn {
+      background-color: darkred;
+    }
+    #exitGoBackBtn:hover {
+      background-color: #b30000;
+    }
+    .close-btn {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
     #loadingSpinner {
       display: none;
       margin: 20px auto;
       border: 6px solid #f3f3f3;
       border-top: 6px solid #007bff;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       animation: spin 1s linear infinite;
     }
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-     .warning-text {
-    color: red;
-    font-weight: bold;
-    animation: shake 0.5s ease-in-out;
-  }
-
-  @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-    }
   </style>
 </head>
-<body>
-  <h2>ITOZE GUSUBIZA IBIBAZO UTSINDIRE PROVISOIRE MU GIHE GITO!</h2>
-  <button class="custom-button" onclick="promptPassword()">Tangira Ikizami Cya 2</button>
-<!-- Password Modal -->
-<div id="password-modal">
-  <div class="modal-content">
-    <span onclick="closeModal()" class="close-btn">&times;</span>
- <h3>SHYIRAMO KODE IKWEMERERA GUKORA IKI KIZAMI</h3>
-<input type="password" id="password-input" placeholder="ANDIKA IYO KODE HANO">
-<br><br>
-<button id="confirmBtn" onclick="checkPassword()">EMEZA NYUMA YO KWANDIKAMO KODE</button>
-<br><br>
-<button id="sectionBtn1" onclick="exitToSection1()">KANDA HANO USABE KODE</button>
-<br><br>
-<button id="sectionBtn2" onclick="exitToSection2()">KANDA HANO UBANZE WIHUGURE</button>
-<br><br>
-
-<button id="exitGoBackBtn" onclick="closeModal()">SOHOKA NIBA UDASHAKA GUKOMEZA</button>   
-   
-  </div>
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+  <h3>ITOZE GUSUBIZA IBIBAZO UTSINDIRE PROVISOIRE MU GIHE GITO!</h3>
+  <button class="custom-button" id="startQuizBtn" onclick="showPasswordModal()">
+    TANGIRA IKIZAMI CYA 2
+  </button>
+ <div id="password-modal">
+    <div class="modal-content">
+ <span class="close-btn" onclick="closePasswordModal()">&times;</span>
+      <h3>SHYIRAMO KODE IKWEMERERA GUKORA IKI KIZAMI</h3>
+     <div style="position: relative; display: inline-block; width: 90%;">
+  <input type="password" id="password-input" placeholder="ANDIKA IYO KODE HANO" oninput="showToggleText()" style="width: 90%; padding-right: 30px;">
+  <span id="show-text" onclick="togglePassword(true)" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); color: black; cursor: pointer; display: none; font-size: 14px;">👁️Garagaza Password</span>
+  <span id="hide-text" onclick="togglePassword(false)" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); color: black; cursor: pointer; display: none; font-size: 14px;">😎Hisha Password</span>
 </div>
-<style>
-  #password-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
-  overflow: auto; /* Enable scrolling if content too long */
-  }
-
-  .modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 10px;
-    text-align: center;
-    position: relative;
-  }
- .modal-content input {
-    width: 90%;
-    padding: 10px;
-    font-size: 10px;
-  }
-
-  button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 2px;
-    width: 100%;
-  }
-
-  #confirmBtn {
-    background-color: #007bff;
-  }
-  #confirmBtn:hover {
-    background-color: #0056b3;
-  }
-    #sectionBtn1 {
-    background-color: green;
-  }
-  #sectionBtn1:hover {
-    background-color: #006400;
-  }
-  #sectionBtn2 {
-    background-color: gray;
- }
- #sectionBtn2:hover {
-    background-color: #555;
- }
-  #exitGoBackBtn {
-    background-color: darkred;
- }
-  #exitGoBackBtn:hover {
-    background-color: #b30000;
-  }
-
-  .close-btn {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-</style>
+      <br><br>
+      <button onclick="checkPassword()" id="confirmBtn">
+        EMEZA NYUMA YO KWANDIKAMO KODE
+      </button>
+      <br><br>
+      <button id="sectionBtn1" onclick="goToSection1()">TWANDIKIRE TUGUFASHE</button>
+      <br><br>
+      <button id="sectionBtn2" onclick="goToSection2()">KANDA HANO UBANZE WIHUGURE</button>
+      <br><br>
+      <button id="exitGoBackBtn" onclick="confirmExit()">SOHOKA NIBA UDASHAKA GUKOMEZA</button>   
+    </div>
+  </div>
 
   <div id="quiz-container">
-<p id="quiz-started-msg" class="warning-text">Ikizami Cyamaze Gutangira...</p>
-<div id="timer" style="font-weight: bold; margin-bottom: 20px; color: red;">
-  Igihe Gisigaye: 20:00
-</div>
-<p>Ikizami Kigizwe n'Ibibazo 20, Buri Kibazo Gifite Inota 1, Kikamara Iminota 20. Amahirwe Masa!!!</p>
-    <div id="question-container"></div>
+    <div id="timer"></div>
+    <p><strong style="color: darkblue;">
+      Ikizami Kigizwe n'Ibibazo 20, Buri Kibazo Gifite Inota 1, Kikamara Iminota 20. Amahirwe Masa!!!
+    </strong></p>
+    <div id="question-box"></div>
     <button class="submit-button" onclick="submitQuiz()">OHEREZA UBONE AMANOTA YAWE</button>
     <button class="home-button" onclick="goToHome()">SOHOKA/SUBIRA KU BIZAMI</button>
     <div id="loadingSpinner"></div>
-    <div id="result-message" style="display: flex; align-items: center; gap: 10px;"></div>
-    <div class="bottom-buttons">
-      <button class="review-button" onclick="reviewAnswers()" style="display:none;">REBA IBISUBIZO BYOSE</button>
-    </div>
-    </div>
+    <div id="result"></div>
+    <button class="review-button" id="reviewAnswersBtn" onclick="reviewAnswers()" style="display:none;">REBA IBISUBIZO BYOSE</button>
   </div>
-  <script>
-    let password = "16480";
-    let quizStarted = false;
-    let currentQuestion = 0;
-    let timerInterval;
-    let timeLeft = 20 * 60;
-    let answers = Array(20).fill(null);
-    let submitted = false;
 
-const questions = [
+<script>
+let quizStarted = false;
+let submitted = false;
+let time = 20 * 60;
+let userAnswers = Array(20).fill(null);
+const correctAnswers = [
+  2, 2, 1, 0, 3, 3, 0, 2, 0, 0,
+  1, 3, 1, 3, 2, 2, 0, 3, 1, 2
+];
+const timerDiv = document.getElementById("timer");
+
+function showPasswordModal() {
+  if (quizStarted) {
+    alert("Ikizami Cyamaze Gutangira/Kurangira! kanda OK ukomeze usubize cg niba wamaze gusubiza umanuke hasi ujye kuri SOHOKA/SUBIRA KU BIZAMI usubire ku bizami wongere utangire!");
+    return;
+  }
+  document.getElementById("password-modal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("password-modal").style.display = "none";
+}
+function togglePassword(show) {
+  const input = document.getElementById("password-input");
+  const showText = document.getElementById("show-text");
+  const hideText = document.getElementById("hide-text");
+
+  if (show) {
+    input.type = "text";
+    showText.style.display = "none";
+    hideText.style.display = "inline";
+  } else {
+    input.type = "password";
+    showText.style.display = "inline";
+    hideText.style.display = "none";
+  }
+}
+
+function showToggleText() {
+  const input = document.getElementById("password-input");
+  const showText = document.getElementById("show-text");
+  const hideText = document.getElementById("hide-text");
+  if (input.value.length > 0) {
+    if (input.type === "password") {
+      showText.style.display = "inline";
+      hideText.style.display = "none";
+    } else {
+      hideText.style.display = "inline";
+      showText.style.display = "none";
+    }
+  } else {
+    showText.style.display = "none";
+    hideText.style.display = "none";
+  }
+}
+
+function closePasswordModal() {
+  const confirmClose = confirm("Urashaka Gusubira Inyuma? Kanda OK niba Udakomeje Ikizamini cg CANCEL ukomeze ikizami");
+  if (confirmClose) {
+    document.getElementById("password-modal").style.display = "none";
+    document.getElementById("startQuizBtn").style.display = "inline-block"; // Optional
+  }
+}
+function checkPassword() {
+  const inputField = document.getElementById("password-input");
+  if (inputField.value === "16480") {
+    closeModal();
+    startQuiz();
+  } else {
+    alert("Andikamo Kode Ya Nyayo Cg Ujye ahanditse TWANDIKIRE TUGUFASHE");
+    inputField.value = "";
+    inputField.focus();
+  }
+}
+
+
+function startQuiz() {
+  quizStarted = true;
+  document.getElementById("quiz-container").style.display = "block";
+  const btn = document.getElementById("startQuizBtn");
+  btn.textContent = "Ikizami Cyatangiye!!!";
+  btn.style.color = "red";
+  showQuestions();
+  startTimer();
+  document.getElementById("startedMessage").style.display = "block";
+  setTimeout(() => {
+    document.getElementById("startedMessage").style.display = "none";
+  }, 120000);
+}
+
+function showQuestions() {
+  let container = document.getElementById("question-box");
+  let output = "";
+
+ const questions = [
   {
     question: "1. Birabujijwe kubangamira imigendere isanzwe y’ibindi binyabiziga kubera ibi bikurikira:",
     options: [
@@ -422,124 +550,133 @@ const questions = [
   }
 ];
 
-  function promptPassword() {
-  if (quizStarted) {
-    alert("Ikizami Cyamaze Gutangira! kanda OK ukomeze cg ujye kuri SOHOKA/SUBIRA KU BIZAMI usubire ku bizami wongere utangire");
+  for (let i = 0; i < questions.length; i++) {
+    const q = questions[i];
+    output += `<div class="question">
+      <p><strong>${q.question}</strong></p>
+      ${q.options
+        .map((opt, j) => `
+          <label class="option-button" id="q${i}${j}">
+            <input type="radio" name="q${i}" value="${j}" onchange="selectAnswer(${i}, ${j})"> ${opt}
+          </label>`)
+        .join("")}
+    </div>`;
+  }
+
+  container.innerHTML = output;
+}
+
+function selectAnswer(q, opt) {
+  userAnswers[q] = opt;
+}
+
+function startTimer() {
+  const interval = setInterval(() => {
+    const mins = Math.floor(time / 60);
+    const secs = time % 60;
+    timerDiv.textContent = `Igihe Gisigaye: ${mins}:${secs < 10 ? '0' + secs : secs}`;
+    time--;
+    if (time < 0 || submitted) {
+      clearInterval(interval);
+      if (!submitted) submitQuiz();
+    }
+  }, 1000);
+}
+
+    
+// Corrected submitQuiz() function with proper scrolling logic
+function submitQuiz() {
+  if (submitted) {
+    alert("Ikizami Cyamaze Gukorwa, kanda kuri OK umanuke hasi ukande kuri SOHOKA/SUBIRA KU BIZAMI wongere usubiremo cg uhitemo ikindi kizami!");
     return;
   }
-  document.getElementById("password-modal").style.display = "block";
+  submitted = true;
+  clearInterval(timer);
+  document.getElementById("timer").textContent = "Igihe gisigaye: 00:00";
+  document.getElementById("loadingSpinner").style.display = "block";
+  document.getElementById("result").textContent = "Tegereza gato...Sisitemu irimo kubara amanota yawe...";
+  setTimeout(() => {
+    document.getElementById("startQuizBtn").textContent = "Ikizami Cyarangiye!";
+    document.getElementById("startQuizBtn").style.color = "red";
+    let score = 0;
+    for (let i = 0; i < 20; i++) {
+      if (userAnswers[i] === correctAnswers[i]) score++;
+    }
+    document.getElementById("loadingSpinner").style.display = "none";
+    document.getElementById("result").innerHTML =
+      `<span style="color:${score < 12 ? 'red' : 'green'};">
+         Wabonye Amanota: ${score}/20<br>
+         ${score < 12 ? 'Watsinzwe, Ukeneye Kwihugura Bihagije!' : 'Watsinze, Komereza Aho!'}
+       </span>`;
+    const reviewBtn = document.getElementById("reviewAnswersBtn");
+    reviewBtn.style.display = "inline-block";
+    reviewBtn.scrollIntoView({ behavior: "smooth" });
+  }, 5000);
 }
 
-function checkPassword() {
-  const inputField = document.getElementById("password-input");
-  const input = inputField.value;
-
-  if (input === password) {
-    document.getElementById("password-modal").style.display = "none";
-    document.getElementById("quiz-container").style.display = "block";
-    quizStarted = true;
-    renderQuestions();
-    startTimer();
-  } else {
-    alert("Andikamo Kode Ya Nyayo Cg Ujye ahanditse KANDA HANO USABE KODE TUGUFASHE!");
-    inputField.value = "";       // isiba automatic
-    inputField.focus();          // cursor isubira mu kibuga
-  }
+// Corrected scrollToTop() function
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
-    function renderQuestions() {
-      const container = document.getElementById("question-container");
-      container.innerHTML = "";
-      questions.forEach((q, index) => {
-        const html = `<div class="question">
-          <p>${q.question}</p>
-          <div class="options">
-            ${q.options.map((opt, i) => `
-              <label>
-                <input type="radio" name="q${index}" value="${i}" ${answers[index] === i ? "checked" : ""} onclick="saveAnswer(${index}, ${i})"> ${opt}
-              </label>`).join("")}
-          </div>
-        </div>`;
-        container.innerHTML += html;
-      });
-    }
 
-    function saveAnswer(qIndex, optIndex) {
-      answers[qIndex] = optIndex;
-    }
+// Optional: Scroll to bottom function if needed separately
+function scrollToBottom() {
+  window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+}
 
-    function startTimer() {
-      timerInterval = setInterval(() => {
-        if (--timeLeft <= 0) {
-          clearInterval(timerInterval);
-          submitQuiz();
+function reviewAnswers() {
+  scrollToTop();
+  for (let i = 0; i < userAnswers.length; i++) {
+    let userAns = userAnswers[i];
+    let correctAns = correctAnswers[i];
+    if (userAns !== null) {
+      if (userAns === correctAns) {
+        let label = document.getElementById(`q${i}${userAns}`);
+        if (label) {
+          label.classList.add('correct');
         }
-        const minutes = String(Math.floor(timeLeft / 60)).padStart(2, "0");
-        const seconds = String(timeLeft % 60).padStart(2, "0");
-        document.getElementById("timer").textContent = `Igihe Gisigaye: ${minutes}:${seconds}`;
-      }, 1000);
-    }
-
-    function submitQuiz() {
-      if (submitted) return alert("Ikizami Cyamaze Koherezwa, Kanda kuri OK ujye kuri SOHOKA/SUBIRA KU BIZAMI wongere utangire !");
-      submitted = true;
-      let score = 0;
-      for (let i = 0; i < questions.length; i++) {
-        if (answers[i] === questions[i].correct) score++;
+      } else {
+        let wrongLabel = document.getElementById(`q${i}${userAns}`);
+        let correctLabel = document.getElementById(`q${i}${correctAns}`);
+        if (wrongLabel) {
+          wrongLabel.classList.add('wrong');
+        }
+        if (correctLabel) {
+          correctLabel.classList.add('correct');
+        }
       }
-          document.getElementById("loadingSpinner").style.display = "block";
-    setTimeout(() => {
-      document.getElementById("loadingSpinner").style.display = "none";
-      document.querySelector(".review-button").style.display = "inline-block";
-      const resultMessage = document.getElementById("result-message");
-      resultMessage.innerHTML =
-        score >= 12
-          ? `<span style='color:green'>Wabonye Amanota ${score}/20<br>Watsinze, Komereza Aho!</span>`
-          : `<span style='color:red'>Wabonye Amanota${score}/20<br>Watsinzwe, Ukeneye Kwihugura Bihagije!</span>`;
-      resultMessage.scrollIntoView({ behavior: "smooth" });
-    }, 5000);
+    } else {
+      let correctLabel = document.getElementById(`q${i}${correctAns}`);
+      if (correctLabel) {
+        correctLabel.classList.add('correct');
+      }
+    }
   }
-    function reviewAnswers() {
-  let output = "";
-  questions.forEach((q, i) => {
-    const correct = q.correct;
-    const user = answers[i];
-    output += `<p><strong>Ikibazo ${i + 1}:</strong> ${q.question}<br>`;
-    q.options.forEach((opt, j) => {
-      const status = j === correct ? "✅" : (j === user ? "❌" : "");
-      output += `${status} ${opt}<br>`;
-    });
-    output += `</p>`;
-  });
-  document.getElementById("question-container").innerHTML = output;
-      window.scrollTo({ top: 0, behavior: "smooth" });
+  document.getElementById("reviewAnswersBtn").style.display = "none";
+document.querySelectorAll('input[type="radio"]').forEach(radio => {
+  radio.disabled = true;
+});
 }
-setTimeout(function() {
-  const msg = document.getElementById("quiz-started-msg");
-  if (msg) msg.style.display = "none";
-}, 120000); // 2 minutes
 
-function exitToSection1() {
- document.getElementById("password-modal").style.display = "none";
+function goToSection1() {
   window.location.href = "https://mwarimudamas.wixsite.com/mwarimudamas#contact-us";
 }
 
-function exitToSection2() {
-  document.getElementById("password-modal").style.display = "none";
+function goToSection2() {
   window.location.href = "https://mwarimudamas.wixsite.com/mwarimudamas#lessons";
 }
 
-function closeModal() {
-  const confirmExit = confirm("Urashaka Gusubira Inyuma? Kanda OK niba Udakomeje Ikizamini cg CANCEL ukomeze ikizami.");
-  if (confirmExit) {
-    document.getElementById('password-modal').style.display = 'none';
-    document.getElementById('start-quiz-btn').style.display = 'inline-block';
-    document.getElementById('password-input').value = "";
+function confirmExit() {
+  const confirmClose = confirm("Urashaka Gusubira Inyuma? Kanda OK niba Udakomeje Ikizamini cg CANCEL ukomeze ikizami");
+  if (confirmClose) {
+    document.getElementById("password-modal").style.display = "none";
+    document.getElementById("startQuizBtn").style.display = "inline-block";
   }
 }
 
 function goToHome() {
-   window.location.href = "https://mwarimudamas.wixsite.com/mwarimudamas#quizzes";
-    }
-  </script>
+  window.location.href = "https://mwarimudamas.wixsite.com/mwarimudamas#quizzes";
+}
+</script>
 </body>
 </html>
