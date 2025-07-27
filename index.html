@@ -574,7 +574,7 @@ function startTimer() {
   const interval = setInterval(() => {
     const mins = Math.floor(time / 60);
     const secs = time % 60;
-    timerDiv.textContent = `Igihe Gisigaye: ${mins}:${secs < 10 ? '0' + secs : secs}`;
+    timerDiv.textContent = `Iminota Isigaye: ${mins}:${secs < 10 ? '0' + secs : secs}`;
     time--;
     if (time < 0 || submitted) {
       clearInterval(interval);
@@ -592,7 +592,7 @@ function submitQuiz() {
   }
   submitted = true;
   clearInterval(timer);
-  document.getElementById("timer").textContent = "Igihe gisigaye: 00:00";
+  document.getElementById("timer").textContent = "Iminota Isigaye: 00:00";
   document.getElementById("loadingSpinner").style.display = "block";
   document.getElementById("result").textContent = "Tegereza gato...Sisitemu irimo kubara amanota yawe...";
   setTimeout(() => {
